@@ -11,12 +11,8 @@ if __name__ == '__main__':
     phenotype_path = os.path.join(data_folder, "Phenotype.csv")
 
     print('  Loading dataset ...')
-
-    # 加载数据
     raw_features, y, nonimg, pd_dict = load_data(modal_name="MRI_CorticalThickness", data_folder=data_folder,
                                                  phenotype_path=phenotype_path)
-
-    # 数据划分
     n_folds = 10
     cv_splits = data_split(raw_features, y, n_folds)
 
