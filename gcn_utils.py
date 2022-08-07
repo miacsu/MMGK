@@ -101,16 +101,6 @@ def preprocess_features(features):
     return features
 
 
-# def preprocess_features(features):
-#     """Col-normalize feature matrix """
-#     colsum = np.array(features.sum(0))
-#     r_inv = np.power(colsum, -1).flatten()
-#     r_inv[np.isinf(r_inv)] = 0.
-#     r_mat_inv = sp.diags(r_inv)     # d * d
-#     features = (r_mat_inv.dot(features.T)).T
-#     return features
-
-
 def normalize_adj(adj):
     """Symmetrically normalize adjacency matrix."""
     adj = sp.coo_matrix(adj)
