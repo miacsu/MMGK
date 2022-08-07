@@ -21,9 +21,7 @@ class OptInit():
         parser.add_argument('--ckpt_path', type=str, default='./save_models/MCI_CN/MRI_CorticalThickness', help='checkpoint path to save trained models')
 
         args = parser.parse_args()
-
         args.time = datetime.datetime.now().strftime("%y%m%d")
-
         if args.use_cpu:
             args.device = torch.device('cpu')
         else:
