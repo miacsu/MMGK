@@ -16,9 +16,7 @@ class PGCN(torch.nn.Module):
         self.gconv = nn.ModuleList()
         for i in range(lg):
             in_channels = input_dim if i == 0 else hidden[i-1]
-            # sym是采用对称归一化
             self.gconv.append(tg.nn.ChebConv(in_channels, hidden[i], K=K, normalization='sym', bias=bias))
-        # cls_input_dim = sum(hidden)
 
         self.cls = nn.Sequential(
                 # torch.nn.Linear(cls_input_dim, 256),
@@ -39,10 +37,7 @@ class PGCN(torch.nn.Module):
                     m.bias.requires_grad = True
 
     def forward(self, features, edge_index, edge_weight):
-
         x = self.relu(self.gconv[0](features, edge_index, edge_weight))
-        # x0 = x
-         
         for i in range(1, self.lg):
             x = F.dropout(x, self.dropout, self.training)
             x = self.relu(self.gconv[i](x, edge_index, edge_weight))
