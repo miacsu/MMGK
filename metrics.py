@@ -29,29 +29,8 @@ if __name__ == '__main__':
     f1 = 2 / (1 / spe + 1 / PPV)
     auc = auc(preds, labels)
     print(matrix)
-
     print("acc: {:.4}%".format(acc*100))
-
     print("sen: {:.4}%".format(sen*100))
-
     print("spe: {:.4}%".format(spe*100))
-
     print("F1: {:.4}%".format(f1*100))
-
     print("auc: {:.4}".format(auc))
-
-    # 加标题
-    plt.title('Results of CN vs. MCI classification')
-    # 柱状图
-    plt.bar(0, acc, error_kw={'ecolor': '0.2', 'capsize': 6}, alpha=0.7, label='ACC')
-    plt.bar(1.5, sen, error_kw={'ecolor': '0.2', 'capsize': 6}, alpha=0.7, label='SEN')
-    plt.bar(3, spe, error_kw={'ecolor': '0.2', 'capsize': 6}, alpha=0.7, label='SPE')
-    # 横轴
-    plt.xticks([0, 1.5, 3], ['ACC', 'SEN', 'SPE'])
-    # 图例
-    plt.legend(loc=2, bbox_to_anchor=(1.05, 1.0), borderaxespad=0.)
-    plt.tight_layout()
-    # 保存
-    #plt.savefig(path + "/res.png")
-    # 展示
-    #plt.show()
