@@ -23,12 +23,8 @@ def calculate_metric(gt, pred):
     Specificity = TN / float(TN+FP)
     return Sen, Specificity
 
-
-# 获取个体表型值
 def get_subject_score(score, phenotype_path):
     scores_dict = {}
-
-    # 查看表型文件中的 SUB_ID列
     with open(phenotype_path) as csv_file:
         reader = csv.DictReader(csv_file)
         for row in reader:
@@ -37,7 +33,6 @@ def get_subject_score(score, phenotype_path):
     return scores_dict
 
 
-# 基于Ridge的特征选择
 def feature_selection(matrix, labels, train_ind, fnum):
     """
         matrix       : feature matrix (num_subjects x num_features)
@@ -61,33 +56,6 @@ def feature_selection(matrix, labels, train_ind, fnum):
     print("Number of features selected %d" % x_data.shape[1])
 
     return x_data
-
-
-# def create_affinity_graph_from_scores(scores, pd_dict):
-#     num_nodes = len(pd_dict[scores[0]])
-#     graph = np.zeros((num_nodes, num_nodes))
-#
-#     for l in scores:
-#         label_dict = pd_dict[l]
-#         if l in ['AGE', 'MMSE', 'PTEDUCAT']:
-#             for k in range(num_nodes):
-#                 for j in range(k + 1, num_nodes):
-#                     try:
-#                         val = abs(float(label_dict[k]) - float(label_dict[j]))
-#                         if val < 2:
-#                             graph[k, j] += 1
-#                             graph[j, k] += 1
-#                     except ValueError:  # missing label
-#                         pass
-#
-#         else:
-#             for k in range(num_nodes):
-#                 for j in range(k + 1, num_nodes):
-#                     if label_dict[k] == label_dict[j]:
-#                         graph[k, j] += 1
-#                         graph[j, k] += 1
-#
-#     return graph
 
 
 def create_affinity_graph_from_scores(scores, pd_dict):
@@ -133,8 +101,6 @@ def get_static_affinity_adj(features, pd_dict):
     sigma = np.mean(dist)
     feature_sim = np.exp(- dist ** 2 / (2 * sigma ** 2))
     adj = pd_affinity * feature_sim
-    #adj = feature_sim
-
     return adj
 
 
@@ -199,42 +165,3 @@ def auc(preds, labels, is_logit=True):
     except:
         auc_out = 0
     return auc_out
-
-
-if __name__ == '__main__':
-    a = torch.randn(8,256)
-    phenotype_path = os.path.join('./data/MCI_CN', "Phenotype.csv")
-    ID_reader = pd.read_csv(phenotype_path)
-    subject_IDs = ID_reader["subjectIdentifier"]
-    labels = get_subject_score(score='DX_Group', phenotype_path=phenotype_path)
-    print(len(labels))
-    num_nodes = len(subject_IDs)
-    mmses = get_subject_score(score='MMSE', phenotype_path=phenotype_path)
-    hc_mmse = []
-    mci_mmse = []
-    j=0
-    k=0
-    for i in range(num_nodes):
-        if int(labels[subject_IDs[i]]) == 0:
-            hc_mmse.append(float(mmses[subject_IDs[i]]))
-        if int(labels[subject_IDs[i]]) == 1:
-            mci_mmse.append(float(mmses[subject_IDs[i]]))
-    print(len(hc_mmse))
-    hc_mmse = np.asarray(hc_mmse)
-    mci_mmse = np.asarray(mci_mmse)
-    print(np.mean(hc_mmse))
-    print(np.std(hc_mmse))
-    print(np.mean(mci_mmse))
-    print(np.std(mci_mmse))
-    print(mci_mmse.shape)
-
-
-
-
-
-
-
-
-
-
-
