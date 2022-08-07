@@ -5,9 +5,7 @@ import pandas as pd
 from gcn_utils import preprocess_features
 from sklearn.model_selection import StratifiedKFold
 
-
 num_classes = 2
-
 
 def load_data(modal_name, data_folder, phenotype_path):
     '''
