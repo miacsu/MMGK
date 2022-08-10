@@ -1,7 +1,7 @@
 # MMGK
 Code for "Multi-modality Multi-view Graph Representations and Knowledge Embedding for Mild Cognitive Impairmen"
 
-# Requirements
+## Requirements
 python==3.6 
 
 torch-geometric==2.0.3
