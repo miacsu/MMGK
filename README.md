@@ -3,7 +3,7 @@ Code for "Multi-modality Multi-view Graph Representations and Knowledge Embeddin
 
 ## Description
 ![image](https://github.com/miacsu/MMGK/blob/main/images/framework.png)
-Fig. 1. Framework of our proposed method
+<p align="center">Fig. 1. Framework of our proposed method</p>
 
 As is shown in Fig.1. , we propose a multi-modality multi-view graph representations and knowledge embedding (MMGK) framework to predict MCI. Firstly, to obtain the rich information in multi-modality data, we extract multi-view feature representations from magnetic resonance imaging (MRI) and genetic data. Afterwards, considering the correlations between subjects, all subjects are constructed into a graph based on the different single-view feature representations, respectively. Moreover, since knowledge is not considered in the previous graph, demographic data is added through knowledge embedding to enrich the correlation information. Then, to perform convolutional operations on graph, we utilize graph convolutional network (GCN) for feature extraction. Finally, to obtain ensemble information from multi-modality data, a two-step ensemble learning is proposed to perform MCI diagnosis.
 
