@@ -1,6 +1,9 @@
 # MMGK
 Code for "Multi-modality Multi-view Graph Representations and Knowledge Embedding for Mild Cognitive Impairmen"
 
+## Description
+![image](https://github.com/miacsu/MMGK/blob/main/images/framework.png)
+
 ## Requirements
 python==3.6 
 
